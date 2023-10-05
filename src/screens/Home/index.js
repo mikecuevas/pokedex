@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
-=======
-import React from 'react';
->>>>>>> 0c67ffbf93bb68b2c22c1ea5827bc6af9cf0a4c2
 import { 
   StyleSheet, 
   Text, 
@@ -11,7 +7,6 @@ import {
   FlatList, 
   TouchableOpacity 
 } from 'react-native';
-<<<<<<< HEAD
 import { SafeAreaView } from 'react-native';
 import { getPokemonList  } from '../../api/pokemonAPI';
 import styles from './style';
@@ -34,12 +29,6 @@ export default function Home({ navigation }) {
 
     fetchPokemonList();
   }, []);
-=======
-
-import styles from './style';
-
-export default function App() {
->>>>>>> 0c67ffbf93bb68b2c22c1ea5827bc6af9cf0a4c2
   return (
     <View style={styles.container}>
 
@@ -61,7 +50,6 @@ export default function App() {
 
       {/* Pokemon List */}
       <FlatList
-<<<<<<< HEAD
         data={pokemonList}
         renderItem={({ item }) => (
           <TouchableOpacity 
@@ -75,19 +63,6 @@ export default function App() {
           </TouchableOpacity>
         )}
         keyExtractor={item => item.url}
-=======
-        data={[{name: 'Pikachu', number: '025'}, {name: 'Bulbasaur', number: '001'}]}  // Sample data
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.pokemonCard}>
-            {/* Placeholder for the Pokemon image/icon */}
-            <View style={styles.pokemonImagePlaceholder}></View>
-            
-            <Text style={styles.pokemonName}>{item.name}</Text>
-            <Text style={styles.pokemonNumber}>#{item.number}</Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={item => item.number}
->>>>>>> 0c67ffbf93bb68b2c22c1ea5827bc6af9cf0a4c2
       />
 
       {/* Pokemon Details */}
@@ -105,10 +80,6 @@ export default function App() {
         <TouchableOpacity style={styles.prevButton}><Text style={styles.buttonText}>Anterior</Text></TouchableOpacity>
         <TouchableOpacity style={styles.nextButton}><Text style={styles.buttonText}>Próximo</Text></TouchableOpacity>
       </View>
-<<<<<<< HEAD
-=======
-
->>>>>>> 0c67ffbf93bb68b2c22c1ea5827bc6af9cf0a4c2
     </View>
   );
 }

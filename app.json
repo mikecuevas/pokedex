@@ -1,10 +1,6 @@
 {
   "expo": {
     "name": "pokeCards",
-<<<<<<< HEAD
-=======
-    "main":"src/screens/Home/index.js",
->>>>>>> 0c67ffbf93bb68b2c22c1ea5827bc6af9cf0a4c2
     "slug": "pokeCards",
     "version": "1.0.0",
     "orientation": "portrait",
