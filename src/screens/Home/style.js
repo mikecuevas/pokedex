@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { StyleSheet, Platform, StatusBar} from 'react-native'; 
 
 
@@ -7,6 +8,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,  // Adicione isto aqui
   },
+=======
+import { StyleSheet } from 'react-native';
+
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'lightgray',
+    },
+>>>>>>> 0c67ffbf93bb68b2c22c1ea5827bc6af9cf0a4c2
     titleBar: {
       height: 50,
       backgroundColor: '#FF3232',  // Vibrant Red color
