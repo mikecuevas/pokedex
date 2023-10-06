@@ -4,10 +4,22 @@ const api = axios.create({
   baseURL: 'https://pokeapi.co/api/v2',
 });
 
-export const getPokemonList = async (limit = 50) => {
+export const getPokemonList = async (limit = 800) => {
   try {
     const response = await api.get(`/pokemon?limit=${limit}`);
-    return response.data.results;
+    const pokemonList = response.data.results;
+
+    const detailedPokemonList = await Promise.all(
+      pokemonList.map(async (pokemon) => {
+        const details = await getPokemonDetails(pokemon.name);
+        return {
+          ...pokemon,
+          details: details
+        };
+      })
+    );
+
+    return detailedPokemonList;
   } catch (error) {
     console.error("Erro ao buscar a lista de Pokémon:", error);
     throw error;
