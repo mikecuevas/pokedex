@@ -10,6 +10,8 @@ import styles from './style';
 import { Image } from 'react-native';
 
 
+
+
 function PokemonDetail({ route }) {
   const [pokemonData, setPokemonData] = useState(null);
   const pokemonName = route.params.pokemonName;
@@ -31,11 +33,19 @@ function PokemonDetail({ route }) {
     return <Text>Carregando...</Text>;
   }
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
   return (
     <View style={styles.detailsContainer}>
-      <Text style={styles.pokemonDetailName}>{pokemonData.name}</Text>
+      <Text style={styles.pokemonDetailName}>{capitalizeFirstLetter(pokemonData.name)}</Text>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: pokemonData.sprites.front_default }} style={styles.pokemonImage} />
+      <Image 
+        source={{ uri: pokemonData.sprites.front_default }} 
+        style={styles.pokemonImage} 
+      />
       </View>
 
       <View style={styles.typesContainer}>

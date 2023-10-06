@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 
 
 const styles = StyleSheet.create({
@@ -55,5 +56,10 @@ const styles = StyleSheet.create({
       fontSize: 16,
       marginBottom: 20,
     },
+    pokemonImage: {
+      width: 100,
+      height: 100,
+      resizeMode: 'contain'
+    }
   });
   
