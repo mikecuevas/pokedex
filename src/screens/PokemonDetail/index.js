@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  StyleSheet, 
   Text, 
   View, 
   Image,
   FlatList, 
+  ScrollView
 } from 'react-native';
 import { getPokemonDetails } from '../../api/pokemonAPI';
 import styles from './style';
+import GradientBackground from '../../utils/GradientBackground';
+
 
 const typeColors = {
   normal: '#A8A878',
@@ -30,6 +32,7 @@ const typeColors = {
   fairy: '#EE99AC'
 };
 
+
 export default function PokemonDetail({ route }) {
   const { pokemonName } = route.params;
   const [pokemonDetails, setPokemonDetails] = useState(null);
@@ -43,6 +46,7 @@ export default function PokemonDetail({ route }) {
         console.error(`Erro ao buscar detalhes do Pokémon ${pokemonName}:`, error);
       }
     };
+
     fetchPokemonDetails();
   }, [pokemonName]);
 
@@ -53,36 +57,58 @@ export default function PokemonDetail({ route }) {
   const mainType = pokemonDetails.types[0].type.name;
 
   return (
-    <View style={[styles.container, { backgroundColor: typeColors[mainType] }]}>
-      <Image
-        source={{ uri: pokemonDetails.sprites.front_default }}
-        style={styles.pokemonImage}
-      />
-      <Text style={styles.pokemonName}>
-        {pokemonDetails.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1)}
-      </Text>
-      <Text style={styles.pokemonNumber}>#{String(pokemonDetails.id).padStart(4, '0')}</Text>
-      <View style={styles.typesContainer}>
-        {pokemonDetails.types.map(type => (
-          <Text 
-            key={type.type.name} 
-            style={[styles.typeBadge, {backgroundColor: typeColors[type.type.name]}]}
-          >
-            {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
+    <ScrollView>
+      <GradientBackground 
+        colors={['#FFFFFF', typeColors[mainType]]} 
+        style={styles.container}
+      >
+        <Image
+          source={{ uri: pokemonDetails.sprites.front_default }}
+          style={styles.pokemonImage}
+        />
+        <Text style={styles.pokemonName}>
+          {pokemonDetails.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1)}
+        </Text>
+        <Text style={styles.pokemonNumber}>#{String(pokemonDetails.id).padStart(4, '0')}</Text>
+
+        <View style={styles.pokemonCard}>
+          <Text style={styles.pokemonDescription}>
+            {`Descrição fictícia para o Pokémon ${pokemonDetails.name}.`}
           </Text>
-        ))}
-      </View>
-      <View style={styles.statsContainer}>
-        {pokemonDetails.stats.map(stat => (
-          <View key={stat.stat.name} style={styles.statRow}>
-            <Text style={styles.statName}>{stat.stat.name.toUpperCase()}</Text>
-            <View style={styles.progressBar}>
-              <View style={[styles.progress, { width: `${(stat.base_stat / 200) * 100}%` }]} />
+        </View>
+
+        <View style={styles.pokemonCard}>
+          <Text style={styles.abilityText}>Habilidades:</Text>
+          {pokemonDetails.abilities.map(ability => (
+            <Text key={ability.ability.name} style={styles.abilityText}>
+              {ability.ability.name}
+            </Text>
+          ))}
+        </View>
+
+        <View style={styles.typesContainer}>
+          {pokemonDetails.types.map(type => (
+            <Text 
+              key={type.type.name} 
+              style={[styles.typeBadge, {backgroundColor: typeColors[type.type.name]}]}
+            >
+              {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
+            </Text>
+          ))}
+        </View>
+
+        <View style={styles.statsContainer}>
+          {pokemonDetails.stats.map(stat => (
+            <View key={stat.stat.name} style={styles.statRow}>
+              <Text style={styles.statName}>{stat.stat.name.toUpperCase()}</Text>
+              <View style={styles.statBar}>
+                <View style={[styles.statBarFill, {width: `${(stat.base_stat / 200) * 100}%`}]} />
+              </View>
+              <Text style={styles.statValue}>{stat.base_stat}</Text>
             </View>
-            <Text style={styles.statValue}>{stat.base_stat}</Text>
-          </View>
-        ))}
-      </View>
-    </View>
+          ))}
+        </View>
+      </GradientBackground>
+    </ScrollView>
   );
 }
