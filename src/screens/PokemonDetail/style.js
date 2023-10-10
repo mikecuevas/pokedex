@@ -1,68 +1,121 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 
-const styles = StyleSheet.create({
-  detailsContainer: {
+export default StyleSheet.create({
+  container: {
     flex: 1,
-    backgroundColor: '#FF0000',
     alignItems: 'center',
-    padding: 20
-  },
-  pokemonDetailName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 10
-  },
-  pokemonDetailNumber: {
-    fontSize: 20,
-    color: 'white',
-    marginBottom: 20
+    justifyContent: 'center',
+    padding: 16,
   },
   pokemonImage: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: 16,
+  },
+  pokemonName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFF',
+    marginTop: 20,
+    textTransform: 'capitalize'
+  },
+  pokemonNumber: {
+    fontSize: 18,
+    color: '#FFF',
     marginBottom: 20
   },
   typesContainer: {
     flexDirection: 'row',
     marginBottom: 20
   },
-  typeLabel: {
-    paddingHorizontal: 10,
+  typeBadge: {
+    paddingHorizontal: 15,
     paddingVertical: 5,
-    borderRadius: 15,
-    marginHorizontal: 5,
-    textTransform: 'capitalize' 
+    marginRight: 10,
+    borderRadius: 20,
+    textTransform: 'capitalize'
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-    alignSelf: 'flex-start',
-    marginLeft: 20,
-    marginBottom: 10
+  statsContainer: {
+    width: '100%',
+    alignItems: 'flex-start'
   },
-  ability: {
-    fontSize: 18,
-    color: 'white',
-    marginBottom: 5,
-    marginLeft: 20
+  statRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    width: '100%'
   },
-  statContainer: {
+  statName: {
+    fontSize: 16,
+    color: '#FFF',
+    width: '30%',
+    textTransform: 'capitalize'
+  },
+  statValue: {
+    fontSize: 14,
+    color: '#FFF',
+    width: '20%',
+    textAlign: 'right',
+    marginRight: 10
+  },
+  statBar: {
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    width: '50%'
+  },
+  statBarFill: {
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#FFF'
+  },
+  pokemonDescription: {
+    fontSize: 16,
+    color: '#FFF',
+    textAlign: 'center',
+    marginVertical: 15
+  },
+  movesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    marginBottom: 10
+    marginBottom: 15
   },
-  statName: {
-    fontSize: 18,
-    color: 'white',
+  moveBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 15,
+    textTransform: 'capitalize'
   },
-  statValue: {
-    fontSize: 18,
+  backgroundGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '100%',
+  },
+  abilityText: {
+    marginVertical: 5,
     color: 'white',
-    fontWeight: 'bold'
-  }
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  pokemonCard: {
+    width: '90%',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, 0.5)',
+    paddingBottom: 5
+  },
 });
-
-export default styles;
