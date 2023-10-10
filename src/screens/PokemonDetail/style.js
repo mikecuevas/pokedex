@@ -1,68 +1,68 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  detailsContainer: {
+export default StyleSheet.create({
+  container: {
     flex: 1,
-    backgroundColor: '#FF0000',
-    alignItems: 'center',
-    padding: 20
-  },
-  pokemonDetailName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 10
-  },
-  pokemonDetailNumber: {
-    fontSize: 20,
-    color: 'white',
-    marginBottom: 20
+    padding: 20,
+    backgroundColor: 'white'
   },
   pokemonImage: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
+    marginTop: 20,
+    marginBottom: 20
+  },
+  pokemonName: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  pokemonNumber: {
+    fontSize: 18,
+    textAlign: 'center',
     marginBottom: 20
   },
   typesContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 20
   },
-  typeLabel: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+  typeBadge: {
+    padding: 10,
     borderRadius: 15,
     marginHorizontal: 5,
-    textTransform: 'capitalize' 
+    alignSelf: 'center'
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-    alignSelf: 'flex-start',
-    marginLeft: 20,
-    marginBottom: 10
+  statsContainer: {
+    flex: 1,
+    marginTop: 20
   },
-  ability: {
-    fontSize: 18,
-    color: 'white',
-    marginBottom: 5,
-    marginLeft: 20
-  },
-  statContainer: {
+  statRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 10
+    alignItems: 'center',
+    marginVertical: 8
   },
   statName: {
-    fontSize: 18,
-    color: 'white',
+    flex: 1,
+    fontSize: 16
   },
   statValue: {
     fontSize: 18,
-    color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginLeft: 10
+  },
+  progressBar: {
+    height: 10,
+    backgroundColor: '#E0E0E0',
+    borderRadius: 5,
+    overflow: 'hidden',
+    flex: 1
+  },
+  progress: {
+    height: '100%',
+    backgroundColor: '#3F51B5', // Cor da barra de progresso
+    borderRadius: 5
   }
 });
-
-export default styles;

@@ -3,7 +3,8 @@ import {
   StyleSheet, 
   Text, 
   View, 
-  Image 
+  Image,
+  FlatList, 
 } from 'react-native';
 import { getPokemonDetails } from '../../api/pokemonAPI';
 import styles from './style';
@@ -29,70 +30,59 @@ const typeColors = {
   fairy: '#EE99AC'
 };
 
-function PokemonDetail({ route }) {
-  const [pokemonData, setPokemonData] = useState(null);
-  
+export default function PokemonDetail({ route }) {
+  const { pokemonName } = route.params;
+  const [pokemonDetails, setPokemonDetails] = useState(null);
+
   useEffect(() => {
     const fetchPokemonDetails = async () => {
       try {
-        const data = await getPokemonDetails(route.params.pokemonName);
-        setPokemonData(data);
+        const data = await getPokemonDetails(pokemonName);
+        setPokemonDetails(data);
       } catch (error) {
-        console.error(`Erro ao buscar detalhes do Pokémon:`, error);
+        console.error(`Erro ao buscar detalhes do Pokémon ${pokemonName}:`, error);
       }
     };
-
     fetchPokemonDetails();
-  }, [route.params.pokemonName]);
+  }, [pokemonName]);
 
-  if (!pokemonData) return <Text>Carregando...</Text>;
+  if (!pokemonDetails) {
+    return <Text>Carregando...</Text>;
+  }
 
-  const mainType = pokemonData.types[0].type.name;
-  const backgroundColor = typeColors[mainType] || '#BDBDBD';
+  const mainType = pokemonDetails.types[0].type.name;
+
   return (
-    <View style={{ ...styles.detailsContainer, backgroundColor }}>
-
-      {/* Nome e Número */}
-      <Text style={styles.pokemonDetailName}>{pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1)}</Text>
-      <Text style={styles.pokemonDetailNumber}>#{pokemonData.id}</Text>
-
-      {/* Imagem do Pokémon */}
+    <View style={[styles.container, { backgroundColor: typeColors[mainType] }]}>
       <Image
-        source={{ uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png` }}
+        source={{ uri: pokemonDetails.sprites.front_default }}
         style={styles.pokemonImage}
       />
-
-      {/* Tipo(s) do Pokémon */}
+      <Text style={styles.pokemonName}>
+        {pokemonDetails.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1)}
+      </Text>
+      <Text style={styles.pokemonNumber}>#{String(pokemonDetails.id).padStart(4, '0')}</Text>
       <View style={styles.typesContainer}>
-        {pokemonData.types.map(typeData => (
-          <Text key={typeData.type.name} style={[styles.typeLabel, { backgroundColor: typeColors[typeData.type.name] }]}>
-            {typeData.type.name.charAt(0).toUpperCase() + typeData.type.name.slice(1)}
+        {pokemonDetails.types.map(type => (
+          <Text 
+            key={type.type.name} 
+            style={[styles.typeBadge, {backgroundColor: typeColors[type.type.name]}]}
+          >
+            {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
           </Text>
         ))}
       </View>
-
-      {/* Habilidades */}
-      <Text style={styles.sectionTitle}>Habilidades</Text>
-      {pokemonData.abilities.map(abilityData => (
-        <Text key={abilityData.ability.name} style={styles.ability}>
-          {abilityData.ability.name.charAt(0).toUpperCase() + abilityData.ability.name.slice(1)}
-        </Text>
-      ))}
-
-      {/* Estatísticas */}
-      <Text style={styles.sectionTitle}>Estatísticas</Text>
-      {pokemonData.stats.map(statData => (
-        <View key={statData.stat.name} style={styles.statContainer}>
-          <Text style={styles.statName}>
-            {statData.stat.name.charAt(0).toUpperCase() + statData.stat.name.slice(1)}
-          </Text>
-          <Text style={styles.statValue}>
-            {statData.base_stat}
-          </Text>
-        </View>
-      ))}
+      <View style={styles.statsContainer}>
+        {pokemonDetails.stats.map(stat => (
+          <View key={stat.stat.name} style={styles.statRow}>
+            <Text style={styles.statName}>{stat.stat.name.toUpperCase()}</Text>
+            <View style={styles.progressBar}>
+              <View style={[styles.progress, { width: `${(stat.base_stat / 200) * 100}%` }]} />
+            </View>
+            <Text style={styles.statValue}>{stat.base_stat}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
-
-export default PokemonDetail;
